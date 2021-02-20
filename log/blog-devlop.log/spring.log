@@ -1,0 +1,298 @@
+2020-04-18 08:28:20.360  INFO 17872 --- [restartedMain] com.patrickstar.blog.BlogApplication     : Starting BlogApplication on MICRO-907281858 with PID 17872 (started by Administrator in D:\Company\Oct 24 2019~\blog)
+2020-04-18 08:28:20.367  INFO 17872 --- [restartedMain] com.patrickstar.blog.BlogApplication     : The following profiles are active: develop
+2020-04-18 08:28:20.494  INFO 17872 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-18 08:28:20.494  INFO 17872 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-18 08:28:21.909  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 08:28:21.910  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 08:28:21.934  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19ms. Found 0 repository interfaces.
+2020-04-18 08:28:21.951  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 08:28:21.952  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 08:28:21.974  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13ms. Found 0 repository interfaces.
+2020-04-18 08:28:22.411  INFO 17872 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-18 08:28:22.868  INFO 17872 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-18 08:28:22.876  INFO 17872 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-18 08:28:22.876  INFO 17872 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-04-18 08:28:22.966  INFO 17872 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-18 08:28:22.966  INFO 17872 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2470 ms
+2020-04-18 08:28:24.188  INFO 17872 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-18 08:28:24.288  INFO 17872 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-18 08:28:24.747  INFO 17872 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-04-18 08:28:24.916  INFO 17872 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-18 08:28:24.964  INFO 17872 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-18 08:28:24.968  INFO 17872 --- [restartedMain] com.patrickstar.blog.BlogApplication     : Started BlogApplication in 5.199 seconds (JVM running for 6.8)
+2020-04-18 08:28:41.424  INFO 17872 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-18 08:28:41.425  INFO 17872 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-18 08:28:41.445  INFO 17872 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
+2020-04-18 08:28:41.480  INFO 17872 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.index', args=[{}]}
+2020-04-18 08:28:41.521  INFO 17872 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-04-18 08:28:41.651  INFO 17872 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-04-18 08:28:41.659 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:28:41.681 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:28:41.726 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:28:41.823  INFO 17872 --- [http-nio-8080-exec-1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2020-04-18 08:28:41.824  INFO 17872 --- [http-nio-8080-exec-1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2020-04-18 08:28:43.642 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : ==>  Preparing: SELECT bt.*, blog_id FROM t_blog_tag bt, t_blog__tag b_t WHERE bt.tag_id = b_t.tag_id ORDER BY ( SELECT count(tag_id) FROM t_blog__tag b_t_2 WHERE b_t.tag_id = b_t_2.tag_id ) DESC 
+2020-04-18 08:28:43.643 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : ==> Parameters: 
+2020-04-18 08:28:43.645 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : <==      Total: 4
+2020-04-18 08:28:43.646 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : ==>  Preparing: SELECT T_B_1.category_id, category_name, blog_id FROM t_blog T_B_1, t_blog_category T_B_C_1 WHERE T_B_1.category_id = T_B_C_1.category_id ORDER BY ( SELECT COUNT(T_B_2.category_id) FROM t_blog_category T_B_C_2, t_blog T_B_2 WHERE T_B_2.category_id = T_B_C_2.category_id AND T_B_2.category_id = T_B_1.category_id ) DESC 
+2020-04-18 08:28:43.646 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : ==> Parameters: 
+2020-04-18 08:28:43.648 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : <==      Total: 3
+2020-04-18 08:28:43.649 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:28:43.649 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:28:43.654 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:28:43.655 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:28:43.655 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:28:43.659 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:28:43.659  INFO 17872 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:28:43.659  INFO 17872 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:28:43.659  INFO 17872 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : Result : index
+2020-04-18 08:28:54.038  INFO 17872 --- [http-nio-8080-exec-4] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.index', args=[{}]}
+2020-04-18 08:28:54.040 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:28:54.040 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:28:54.044 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:28:55.950 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.TagDao.getAllTagIndex       : ==>  Preparing: SELECT bt.*, blog_id FROM t_blog_tag bt, t_blog__tag b_t WHERE bt.tag_id = b_t.tag_id ORDER BY ( SELECT count(tag_id) FROM t_blog__tag b_t_2 WHERE b_t.tag_id = b_t_2.tag_id ) DESC 
+2020-04-18 08:28:55.950 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.TagDao.getAllTagIndex       : ==> Parameters: 
+2020-04-18 08:28:55.952 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.TagDao.getAllTagIndex       : <==      Total: 4
+2020-04-18 08:28:55.953 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.CategoryDao.getAllCategory  : ==>  Preparing: SELECT T_B_1.category_id, category_name, blog_id FROM t_blog T_B_1, t_blog_category T_B_C_1 WHERE T_B_1.category_id = T_B_C_1.category_id ORDER BY ( SELECT COUNT(T_B_2.category_id) FROM t_blog_category T_B_C_2, t_blog T_B_2 WHERE T_B_2.category_id = T_B_C_2.category_id AND T_B_2.category_id = T_B_1.category_id ) DESC 
+2020-04-18 08:28:55.953 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.CategoryDao.getAllCategory  : ==> Parameters: 
+2020-04-18 08:28:55.955 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.CategoryDao.getAllCategory  : <==      Total: 3
+2020-04-18 08:28:55.956 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:28:55.956 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:28:55.958 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:28:55.959 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:28:55.959 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:28:55.964 DEBUG 17872 --- [http-nio-8080-exec-4] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:28:55.964  INFO 17872 --- [http-nio-8080-exec-4] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:28:55.964  INFO 17872 --- [http-nio-8080-exec-4] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:28:55.964  INFO 17872 --- [http-nio-8080-exec-4] com.patrickstar.blog.aspect.LogAspect    : Result : index
+2020-04-18 08:29:04.443 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.UserDao.getUserPass         : ==>  Preparing: SELECT user_pass FROM t_blog_admin_user WHERE user_name = ? 
+2020-04-18 08:29:04.444 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.UserDao.getUserPass         : ==> Parameters: 1(String)
+2020-04-18 08:29:04.447 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.UserDao.getUserPass         : <==      Total: 1
+2020-04-18 08:29:06.503 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlogAdmin     : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_RECOMMEND, BLOG_DRAFTS, BLOG_MODIFY_TIME, t_b.category_id, category_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id ORDER BY blog_publish_time DESC 
+2020-04-18 08:29:06.503 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlogAdmin     : ==> Parameters: 
+2020-04-18 08:29:06.507 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlogAdmin     : <==      Total: 3
+2020-04-18 08:29:06.508 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==>  Preparing: SELECT category_id AS 'id', category_name AS 'name' FROM t_blog_category 
+2020-04-18 08:29:06.508 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==> Parameters: 
+2020-04-18 08:29:06.509 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.b.d.CategoryDao.getAllCategoryAdmin  : <==      Total: 4
+2020-04-18 08:29:06.510 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:06.511 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:06.513 DEBUG 17872 --- [http-nio-8080-exec-6] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:08.814 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.BlogDao.getBlog   : ==>  Preparing: SELECT BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name FROM t_blog t_b, t_blog_category t_b_c WHERE t_b.category_id = t_b_c.category_id AND blog_id = ? 
+2020-04-18 08:29:08.815 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.BlogDao.getBlog   : ==> Parameters: 5(Integer)
+2020-04-18 08:29:08.817 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.BlogDao.getBlog   : <==      Total: 1
+2020-04-18 08:29:08.818 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogTagDao.getBlogAllTag    : ==>  Preparing: SELECT tag_id AS 'tagId' FROM t_blog__tag WHERE blog_id = ? 
+2020-04-18 08:29:08.818 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogTagDao.getBlogAllTag    : ==> Parameters: 5(Integer)
+2020-04-18 08:29:08.820 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogTagDao.getBlogAllTag    : <==      Total: 2
+2020-04-18 08:29:08.836 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.TagDao.getRequireTag        : ==>  Preparing: SELECT tag_id AS 'id', tag_name AS 'name' FROM t_blog_tag WHERE tag_id IN ( ? , ? ) 
+2020-04-18 08:29:08.837 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.TagDao.getRequireTag        : ==> Parameters: 2(Integer), 5(Integer)
+2020-04-18 08:29:08.838 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.TagDao.getRequireTag        : <==      Total: 2
+2020-04-18 08:29:08.838 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.TagDao.getAllTag  : ==>  Preparing: SELECT c.tag_id, tag_name, blog_id FROM t_blog_tag c left join t_blog__tag b on c.tag_id = b.tag_id ORDER BY( SELECT COUNT(a.tag_id) FROM t_blog__tag a WHERE a.tag_id = c.tag_id ) DESC; 
+2020-04-18 08:29:08.839 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.TagDao.getAllTag  : ==> Parameters: 
+2020-04-18 08:29:08.842 DEBUG 17872 --- [http-nio-8080-exec-7] c.patrickstar.blog.dao.TagDao.getAllTag  : <==      Total: 13
+2020-04-18 08:29:08.843 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==>  Preparing: SELECT category_id AS 'id', category_name AS 'name' FROM t_blog_category 
+2020-04-18 08:29:08.843 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==> Parameters: 
+2020-04-18 08:29:08.845 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryAdmin  : <==      Total: 4
+2020-04-18 08:29:10.874 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.deleteBlogTag    : ==>  Preparing: DELETE FROM t_blog__tag WHERE blog_id = ? 
+2020-04-18 08:29:10.874 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.deleteBlogTag    : ==> Parameters: 5(Integer)
+2020-04-18 08:29:10.878 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.deleteBlogTag    : <==    Updates: 2
+2020-04-18 08:29:10.880 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : ==>  Preparing: INSERT INTO t_blog__tag(BLOG_ID, TAG_ID) VALUES(?, ?) 
+2020-04-18 08:29:10.880 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : ==> Parameters: 5(Integer), 2(Integer)
+2020-04-18 08:29:10.882 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : <==    Updates: 1
+2020-04-18 08:29:10.883 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : ==>  Preparing: INSERT INTO t_blog__tag(BLOG_ID, TAG_ID) VALUES(?, ?) 
+2020-04-18 08:29:10.884 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : ==> Parameters: 5(Integer), 5(Integer)
+2020-04-18 08:29:10.885 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogTagDao.addBlogTag       : <==    Updates: 1
+2020-04-18 08:29:10.885 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.updateBlog          : ==>  Preparing: UPDATE t_blog SET BLOG_NAME = ?, blog_describe = ?, BLOG_CONTENT = ?, BLOG_COVER = ?, BLOG_TYPE = ?, BLOG_RECOMMEND = ?, BLOG_APPRECIATION = ?, BLOG_COMMENT = ?, BLOG_SHARABLE = ?, BLOG_DRAFTS = ?, BLOG_MODIFY_TIME = ?, category_id = ? WHERE blog_id = ? 
+2020-04-18 08:29:10.887 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.updateBlog          : ==> Parameters: 测试图片(String), 测试图片(String), ![3AHWJP.jpg](https://s2.ax1x.com/2020/02/19/3AHWJP.jpg)(String), https://c-ssl.duitang.com/uploads/item/201803/17/20180317212504_43Rkk.jpeg(String), 原创(String), true(Boolean), false(Boolean), true(Boolean), false(Boolean), false(Boolean), 2020-04-18 08:29:10.872(Timestamp), 2(Integer), 5(Integer)
+2020-04-18 08:29:10.889 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.updateBlog          : <==    Updates: 1
+2020-04-18 08:29:10.923 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlogAdmin     : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_RECOMMEND, BLOG_DRAFTS, BLOG_MODIFY_TIME, t_b.category_id, category_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id ORDER BY blog_publish_time DESC 
+2020-04-18 08:29:10.923 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlogAdmin     : ==> Parameters: 
+2020-04-18 08:29:10.925 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlogAdmin     : <==      Total: 3
+2020-04-18 08:29:10.926 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==>  Preparing: SELECT category_id AS 'id', category_name AS 'name' FROM t_blog_category 
+2020-04-18 08:29:10.926 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.b.d.CategoryDao.getAllCategoryAdmin  : ==> Parameters: 
+2020-04-18 08:29:10.927 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.b.d.CategoryDao.getAllCategoryAdmin  : <==      Total: 4
+2020-04-18 08:29:10.928 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:10.928 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:10.931 DEBUG 17872 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:14.665  INFO 17872 --- [http-nio-8080-exec-3] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.index', args=[{}]}
+2020-04-18 08:29:14.667 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:14.667 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:14.670 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:14.997 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.TagDao.getAllTagIndex       : ==>  Preparing: SELECT bt.*, blog_id FROM t_blog_tag bt, t_blog__tag b_t WHERE bt.tag_id = b_t.tag_id ORDER BY ( SELECT count(tag_id) FROM t_blog__tag b_t_2 WHERE b_t.tag_id = b_t_2.tag_id ) DESC 
+2020-04-18 08:29:14.998 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.TagDao.getAllTagIndex       : ==> Parameters: 
+2020-04-18 08:29:14.999 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.TagDao.getAllTagIndex       : <==      Total: 4
+2020-04-18 08:29:14.999 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.CategoryDao.getAllCategory  : ==>  Preparing: SELECT T_B_1.category_id, category_name, blog_id FROM t_blog T_B_1, t_blog_category T_B_C_1 WHERE T_B_1.category_id = T_B_C_1.category_id ORDER BY ( SELECT COUNT(T_B_2.category_id) FROM t_blog_category T_B_C_2, t_blog T_B_2 WHERE T_B_2.category_id = T_B_C_2.category_id AND T_B_2.category_id = T_B_1.category_id ) DESC 
+2020-04-18 08:29:15.000 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.CategoryDao.getAllCategory  : ==> Parameters: 
+2020-04-18 08:29:15.001 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.CategoryDao.getAllCategory  : <==      Total: 3
+2020-04-18 08:29:15.002 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:15.002 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:15.005 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:15.005 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:29:15.006 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:29:15.008 DEBUG 17872 --- [http-nio-8080-exec-3] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:29:15.008  INFO 17872 --- [http-nio-8080-exec-3] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:29:15.008  INFO 17872 --- [http-nio-8080-exec-3] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:29:15.008  INFO 17872 --- [http-nio-8080-exec-3] com.patrickstar.blog.aspect.LogAspect    : Result : index
+2020-04-18 08:29:20.041  INFO 17872 --- [http-nio-8080-exec-7] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/blog_category', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.goCategory', args=[{}]}
+2020-04-18 08:29:20.042 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:20.043 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:20.045 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:20.046 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==>  Preparing: SELECT bc.*, blog_id FROM t_blog_category bc LEFT JOIN t_blog b ON bc.category_id = b.category_id 
+2020-04-18 08:29:20.046 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==> Parameters: 
+2020-04-18 08:29:20.047 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.b.d.CategoryDao.getAllCategoryIndex  : <==      Total: 5
+2020-04-18 08:29:20.048 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:20.048 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:20.050 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:20.355 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:29:20.355 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:29:20.357 DEBUG 17872 --- [http-nio-8080-exec-7] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:29:20.357  INFO 17872 --- [http-nio-8080-exec-7] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:29:20.358  INFO 17872 --- [http-nio-8080-exec-7] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:29:20.358  INFO 17872 --- [http-nio-8080-exec-7] com.patrickstar.blog.aspect.LogAspect    : Result : category
+2020-04-18 08:29:55.826  INFO 17872 --- [http-nio-8080-exec-8] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/blog_tag', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.goTag', args=[{}]}
+2020-04-18 08:29:55.827 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:55.827 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:55.831 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:56.196 DEBUG 17872 --- [http-nio-8080-exec-8] c.patrickstar.blog.dao.TagDao.getAllTag  : ==>  Preparing: SELECT c.tag_id, tag_name, blog_id FROM t_blog_tag c left join t_blog__tag b on c.tag_id = b.tag_id ORDER BY( SELECT COUNT(a.tag_id) FROM t_blog__tag a WHERE a.tag_id = c.tag_id ) DESC; 
+2020-04-18 08:29:56.196 DEBUG 17872 --- [http-nio-8080-exec-8] c.patrickstar.blog.dao.TagDao.getAllTag  : ==> Parameters: 
+2020-04-18 08:29:56.198 DEBUG 17872 --- [http-nio-8080-exec-8] c.patrickstar.blog.dao.TagDao.getAllTag  : <==      Total: 13
+2020-04-18 08:29:56.198 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:29:56.198 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:29:56.200 DEBUG 17872 --- [http-nio-8080-exec-8] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:29:56.200  INFO 17872 --- [http-nio-8080-exec-8] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:29:56.200  INFO 17872 --- [http-nio-8080-exec-8] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:29:56.200  INFO 17872 --- [http-nio-8080-exec-8] com.patrickstar.blog.aspect.LogAspect    : Result : tag
+2020-04-18 08:29:57.677  INFO 17872 --- [http-nio-8080-exec-2] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/blog_category', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.goCategory', args=[{}]}
+2020-04-18 08:29:57.681 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:57.681 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:57.683 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:57.684 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==>  Preparing: SELECT bc.*, blog_id FROM t_blog_category bc LEFT JOIN t_blog b ON bc.category_id = b.category_id 
+2020-04-18 08:29:57.684 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==> Parameters: 
+2020-04-18 08:29:57.685 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.b.d.CategoryDao.getAllCategoryIndex  : <==      Total: 5
+2020-04-18 08:29:57.686 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:29:57.686 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:29:57.687 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:29:58.003 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:29:58.003 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:29:58.005 DEBUG 17872 --- [http-nio-8080-exec-2] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:29:58.005  INFO 17872 --- [http-nio-8080-exec-2] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:29:58.006  INFO 17872 --- [http-nio-8080-exec-2] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:29:58.006  INFO 17872 --- [http-nio-8080-exec-2] com.patrickstar.blog.aspect.LogAspect    : Result : category
+2020-04-18 08:30:06.098  INFO 17872 --- [http-nio-8080-exec-5] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/blog_tag', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.goTag', args=[{}]}
+2020-04-18 08:30:06.099 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:30:06.099 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:30:06.103 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:30:06.706 DEBUG 17872 --- [http-nio-8080-exec-5] c.patrickstar.blog.dao.TagDao.getAllTag  : ==>  Preparing: SELECT c.tag_id, tag_name, blog_id FROM t_blog_tag c left join t_blog__tag b on c.tag_id = b.tag_id ORDER BY( SELECT COUNT(a.tag_id) FROM t_blog__tag a WHERE a.tag_id = c.tag_id ) DESC; 
+2020-04-18 08:30:06.706 DEBUG 17872 --- [http-nio-8080-exec-5] c.patrickstar.blog.dao.TagDao.getAllTag  : ==> Parameters: 
+2020-04-18 08:30:06.708 DEBUG 17872 --- [http-nio-8080-exec-5] c.patrickstar.blog.dao.TagDao.getAllTag  : <==      Total: 13
+2020-04-18 08:30:06.709 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:30:06.709 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:30:06.711 DEBUG 17872 --- [http-nio-8080-exec-5] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:30:06.711  INFO 17872 --- [http-nio-8080-exec-5] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:30:06.711  INFO 17872 --- [http-nio-8080-exec-5] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:30:06.712  INFO 17872 --- [http-nio-8080-exec-5] com.patrickstar.blog.aspect.LogAspect    : Result : tag
+2020-04-18 08:30:52.523  INFO 17872 --- [http-nio-8080-exec-9] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/blog_category', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.goCategory', args=[{}]}
+2020-04-18 08:30:52.524 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:30:52.525 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:30:52.528 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:30:52.529 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==>  Preparing: SELECT bc.*, blog_id FROM t_blog_category bc LEFT JOIN t_blog b ON bc.category_id = b.category_id 
+2020-04-18 08:30:52.529 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.b.d.CategoryDao.getAllCategoryIndex  : ==> Parameters: 
+2020-04-18 08:30:52.530 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.b.d.CategoryDao.getAllCategoryIndex  : <==      Total: 5
+2020-04-18 08:30:52.531 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY blog_publish_time DESC; 
+2020-04-18 08:30:52.531 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 08:30:52.533 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 08:30:53.008 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 08:30:53.008 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 08:30:53.010 DEBUG 17872 --- [http-nio-8080-exec-9] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 08:30:53.010  INFO 17872 --- [http-nio-8080-exec-9] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 08:30:53.011  INFO 17872 --- [http-nio-8080-exec-9] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 08:30:53.011  INFO 17872 --- [http-nio-8080-exec-9] com.patrickstar.blog.aspect.LogAspect    : Result : category
+2020-04-18 09:10:05.232  INFO 17872 --- [Thread-14] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-04-18 09:10:05.236  INFO 17872 --- [Thread-14] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-18 09:10:06.374  INFO 17872 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-04-18 09:10:06.386  INFO 17872 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-04-18 09:10:09.836  INFO 17872 --- [restartedMain] com.patrickstar.blog.BlogApplication     : Starting BlogApplication on MICRO-907281858 with PID 17872 (started by Administrator in D:\Company\Oct 24 2019~\blog)
+2020-04-18 09:10:09.837  INFO 17872 --- [restartedMain] com.patrickstar.blog.BlogApplication     : The following profiles are active: develop
+2020-04-18 09:10:10.915  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 09:10:10.917  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 09:10:10.966  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48ms. Found 0 repository interfaces.
+2020-04-18 09:10:10.987  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 09:10:10.987  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 09:10:11.025  INFO 17872 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37ms. Found 0 repository interfaces.
+2020-04-18 09:10:11.410  INFO 17872 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-18 09:10:11.725  WARN 17872 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
+2020-04-18 09:10:11.855  INFO 17872 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-18 09:10:11.857  INFO 17872 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-18 09:10:11.858  INFO 17872 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-04-18 09:10:11.927  INFO 17872 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-18 09:10:11.927  INFO 17872 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2060 ms
+2020-04-18 09:10:11.995  WARN 17872 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'commentController': Unsatisfied dependency expressed through field 'commentService'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.patrickstar.blog.service.CommentService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2020-04-18 09:10:11.996  INFO 17872 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-04-18 09:10:12.012  INFO 17872 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-04-18 09:10:12.603 ERROR 17872 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field commentService in com.patrickstar.blog.controller.CommentController required a bean of type 'com.patrickstar.blog.service.CommentService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.patrickstar.blog.service.CommentService' in your configuration.
+
+2020-04-18 21:31:12.717  INFO 3200 --- [restartedMain] com.patrickstar.blog.BlogApplication     : Starting BlogApplication on MICRO-907281858 with PID 3200 (started by Administrator in D:\Company\Oct 24 2019~\blog)
+2020-04-18 21:31:12.768  INFO 3200 --- [restartedMain] com.patrickstar.blog.BlogApplication     : The following profiles are active: develop
+2020-04-18 21:31:12.963  INFO 3200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-18 21:31:12.964  INFO 3200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-18 21:31:14.409  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 21:31:14.410  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 21:31:14.437  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21ms. Found 0 repository interfaces.
+2020-04-18 21:31:14.459  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-18 21:31:14.460  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-18 21:31:14.483  INFO 3200 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12ms. Found 0 repository interfaces.
+2020-04-18 21:31:14.968  INFO 3200 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-18 21:31:15.599  INFO 3200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-18 21:31:15.611  INFO 3200 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-18 21:31:15.612  INFO 3200 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-04-18 21:31:15.803  INFO 3200 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-18 21:31:15.804  INFO 3200 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2839 ms
+2020-04-18 21:31:17.398  INFO 3200 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-18 21:31:17.516  INFO 3200 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-18 21:31:18.113  INFO 3200 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-04-18 21:31:18.315  INFO 3200 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-18 21:31:18.383  INFO 3200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-18 21:31:18.386  INFO 3200 --- [restartedMain] com.patrickstar.blog.BlogApplication     : Started BlogApplication in 6.84 seconds (JVM running for 8.817)
+2020-04-18 21:31:24.830  INFO 3200 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-18 21:31:24.830  INFO 3200 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-18 21:31:24.857  INFO 3200 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 26 ms
+2020-04-18 21:31:24.910  INFO 3200 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : Request : RequestInfo{url='http://localhost:8080/', ip='0:0:0:0:0:0:0:1', classMethod='com.patrickstar.blog.controller.IndexController.index', args=[{}]}
+2020-04-18 21:31:24.953  INFO 3200 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-04-18 21:31:25.138  INFO 3200 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-04-18 21:31:25.147 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY BLOG_MODIFY_TIME DESC; 
+2020-04-18 21:31:25.194 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 21:31:25.248 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 21:31:25.424  INFO 3200 --- [http-nio-8080-exec-1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2020-04-18 21:31:25.427  INFO 3200 --- [http-nio-8080-exec-1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2020-04-18 21:31:27.687 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : ==>  Preparing: SELECT bt.*, blog_id FROM t_blog_tag bt, t_blog__tag b_t WHERE bt.tag_id = b_t.tag_id ORDER BY ( SELECT count(tag_id) FROM t_blog__tag b_t_2 WHERE b_t.tag_id = b_t_2.tag_id ) DESC 
+2020-04-18 21:31:27.688 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : ==> Parameters: 
+2020-04-18 21:31:27.691 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.TagDao.getAllTagIndex       : <==      Total: 4
+2020-04-18 21:31:27.692 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : ==>  Preparing: SELECT T_B_1.category_id, category_name, blog_id FROM t_blog T_B_1, t_blog_category T_B_C_1 WHERE T_B_1.category_id = T_B_C_1.category_id ORDER BY ( SELECT COUNT(T_B_2.category_id) FROM t_blog_category T_B_C_2, t_blog T_B_2 WHERE T_B_2.category_id = T_B_C_2.category_id AND T_B_2.category_id = T_B_1.category_id ) DESC 
+2020-04-18 21:31:27.692 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : ==> Parameters: 
+2020-04-18 21:31:27.695 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.CategoryDao.getAllCategory  : <==      Total: 3
+2020-04-18 21:31:27.696 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==>  Preparing: SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE, BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT, BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME, t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name FROM t_blog t_b left join t_blog_category t_b_c ON t_b.category_id = t_b_c.category_id LEFT JOIN ( t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t ON t_b_t.tag_id = t_b__t.tag_id ) ON t_b.blog_id = t_b__t.blog_id WHERE BLOG_DRAFTS = 0 ORDER BY BLOG_MODIFY_TIME DESC; 
+2020-04-18 21:31:27.696 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : ==> Parameters: 
+2020-04-18 21:31:27.703 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getAllBlog          : <==      Total: 4
+2020-04-18 21:31:27.704 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : ==>  Preparing: SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5 
+2020-04-18 21:31:27.704 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : ==> Parameters: 
+2020-04-18 21:31:27.708 DEBUG 3200 --- [http-nio-8080-exec-1] c.p.blog.dao.BlogDao.getLatestBlog       : <==      Total: 3
+2020-04-18 21:31:27.709  INFO 3200 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : -------------doAfter--------------
+2020-04-18 21:31:27.709  INFO 3200 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : -------------AfterReturning--------------
+2020-04-18 21:31:27.709  INFO 3200 --- [http-nio-8080-exec-1] com.patrickstar.blog.aspect.LogAspect    : Result : index

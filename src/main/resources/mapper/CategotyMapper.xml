@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.CategoryDao">
+    <insert id="addCategory"  parameterType="com.patrickstar.blog.entity.Category" >
+        INSERT INTO t_blog_category(CATEGORY_ID, CATEGORY_NAME) VALUES (#{id}, #{name})
+    </insert>
+    <delete id="deleteCategory" parameterType="java.lang.Integer" >
+        DELETE FROM t_blog_category WHERE category_id = #{id}
+    </delete>
+    <update id="updateCategory" parameterType="com.patrickstar.blog.entity.Category">
+        UPDATE t_blog_category SET category_name = #{name} WHERE category_id = #{id}
+    </update>
+    <select id="getCategory" parameterType="java.lang.Integer" resultMap="getCategoryFullInfo">
+        SELECT t_b_c.category_id, category_name, blog_id
+        FROM t_blog_category t_b_c, t_blog t_b
+        WHERE t_b_c.category_id = t_b.category_id AND t_b_c.category_id = #{id}
+    </select>
+    <select id="getAllCategory" resultMap="getCategoryFullInfo">
+        SELECT T_B_1.category_id, category_name, blog_id FROM t_blog T_B_1, t_blog_category T_B_C_1
+        WHERE T_B_1.category_id = T_B_C_1.category_id
+        ORDER BY (
+            SELECT COUNT(T_B_2.category_id) FROM t_blog_category T_B_C_2, t_blog T_B_2
+            WHERE T_B_2.category_id = T_B_C_2.category_id AND T_B_2.category_id = T_B_1.category_id
+                     )
+        DESC
+    </select>
+    <select id="getAllCategoryAdmin" resultType="com.patrickstar.blog.entity.Category">
+        SELECT category_id AS 'id', category_name AS 'name' FROM t_blog_category
+    </select>
+    <select id="getAllCategoryIndex" resultMap="getCategoryFullInfo">
+        SELECT bc.*, blog_id FROM t_blog_category bc LEFT JOIN t_blog b ON bc.category_id = b.category_id
+    </select>
+    <resultMap id="getCategoryFullInfo" type="com.patrickstar.blog.entity.Category">
+        <id property="id" column="category_id"/>
+        <result property="name" column="category_name"/>
+        <collection property="blogs" ofType="com.patrickstar.blog.entity.Blog">
+            <id property="id" column="blog_id"/>
+        </collection>
+    </resultMap>
+</mapper>

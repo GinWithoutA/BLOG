@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.UserDao">
+    <select id="getUserPass" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT user_pass FROM t_blog_admin_user WHERE user_name = #{userName}
+    </select>
+</mapper>

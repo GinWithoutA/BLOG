@@ -1,0 +1,24 @@
+#生产环境
+#数据库连接信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.100.49.75:3306/blog?useSSL=false&serverTimezone=CTT&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: mysql1234
+#配置mybatis的信息
+#spring继承mybatis环境
+#POJO别名扫描的包
+mybatis:
+  type-aliases-package: com.ucar.training.dao
+  #加载mybatis映射文件
+  mapper-locations: classpath:mapper/*Mapper.xml
+#mybatis整合springboot日志输出
+logging:
+  level:
+    root: warn
+    com.patrickstar.blog: info
+  file:
+    path: log/blog-production.log
+server:
+  port: 8081

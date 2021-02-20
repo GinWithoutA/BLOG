@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.CommentDao">
+    <insert id="addComment" parameterType="com.patrickstar.blog.entity.Comment">
+        INSERT INTO t_blog_comment(COMMENT_USER_NAME, COMMENT_HEAD_PORTRAIT, COMMENT_CONTENT, COMMENT_LIKED, COMMENT_DISLIKED, COMMENT_LINKED, BLOG_ID, EMAIL, COMMENT_ADMIN)
+        VALUES(#{nickName}, #{headPortrait}, #{content}, #{liked}, #{disliked}, #{parent.id}, #{blog.id}, #{email}, #{isAdmin})
+    </insert>
+    <select id="getAllComment" parameterType="java.lang.Integer" resultMap="getCommentFullInfo">
+        SELECT * FROM t_blog_comment WHERE blog_id = #{blogId} AND comment_linked = -1 ORDER BY comment_time DESC
+    </select>
+    <select id="getCommentChildren" parameterType="java.lang.Integer" resultMap="getCommentFullInfo">
+        SELECT a.*, b.comment_id AS 'parent_id', b.comment_user_name AS 'parent_name' FROM t_blog_comment a INNER join t_blog_comment b ON a.comment_linked = b.comment_id WHERE a.blog_id = #{blogId} AND b.comment_id = #{commentId} ORDER BY a.comment_time DESC
+
+    </select>
+    <resultMap id="getCommentFullInfo" type="com.patrickstar.blog.entity.Comment">
+        <id column="comment_id" property="id"/>
+        <result column="comment_user_name" property="nickName"/>
+        <result column="comment_head_portrait" property="headPortrait"/>
+        <result column="comment_content" property="content"/>
+        <result column="comment_liked" property="liked"/>
+        <result column="comment_disliked" property="disliked"/>
+        <result column="comment_time" property="commentTime"/>
+        <result column="email" property="email"/>
+        <result column="blog_id" property="blog.id"/>
+        <result column="comment_admin" property="isAdmin"/>
+        <association property="parent" javaType="com.patrickstar.blog.entity.Comment">
+            <id property="id" column="parent_id"/>
+            <result property="nickName" column="parent_name"/>
+        </association>
+    </resultMap>
+</mapper>

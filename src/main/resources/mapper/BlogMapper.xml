@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.BlogDao">
+    <insert id="addBlog" useGeneratedKeys="true" keyProperty="id" keyColumn="blog_id" parameterType="com.patrickstar.blog.entity.Blog">
+        INSERT INTO `t_blog`(blog_name, blog_content, blog_describe, blog_cover, blog_type, blog_view_count, blog_recommend, blog_appreciation, blog_comment, blog_sharable, blog_drafts, category_id) values(#{title}, #{content}, #{describe}, #{cover}, #{type}, #{viewCount}, #{recommend}, #{appreciation}, #{comment}, #{sharable}, #{drafts}, #{belongCategory.id});
+    </insert>
+    <delete id="deleteBlog" parameterType="java.lang.Integer">
+        DELETE FROM `t_blog` WHERE `blog_id` = #{id}
+    </delete>
+    <update id="updateBlog" parameterType="com.patrickstar.blog.entity.Blog">
+        UPDATE t_blog SET BLOG_NAME = #{title}, blog_describe = #{describe}, BLOG_CONTENT = #{content}, BLOG_COVER = #{cover}, BLOG_TYPE = #{type}, BLOG_RECOMMEND = #{recommend}, BLOG_APPRECIATION = #{appreciation}, BLOG_COMMENT = #{comment}, BLOG_SHARABLE = #{sharable}, BLOG_DRAFTS = #{drafts}, BLOG_MODIFY_TIME = #{modifyTime}, category_id = #{belongCategory.id} WHERE blog_id = #{id}
+    </update>
+    <update id="updateBlogViewCount" parameterType="java.lang.Integer">
+        UPDATE t_blog SET blog_view_count = #{viewCount} WHERE BLOG_ID = #{id}
+    </update>
+    <select id="getBlog" parameterType="java.lang.Integer" resultMap="getBlogFullInfoMap">
+        SELECT BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE,
+               BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT,
+               BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME,
+               t_b.category_id, category_name
+        FROM t_blog t_b, t_blog_category t_b_c
+        WHERE t_b.category_id = t_b_c.category_id AND blog_id = #{id}
+    </select>
+    <select id="getAllBlog" resultMap="getBlogFullInfoMap">
+        SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_DESCRIBE, BLOG_CONTENT, BLOG_COVER, BLOG_TYPE,
+               BLOG_VIEW_COUNT, BLOG_RECOMMEND, BLOG_APPRECIATION, BLOG_COMMENT,
+               BLOG_SHARABLE, BLOG_DRAFTS, BLOG_PUBLISH_TIME, BLOG_MODIFY_TIME,
+               t_b.category_id, category_name, t_b_t.tag_id, t_b_t.tag_name
+        FROM t_blog t_b left join t_blog_category t_b_c
+        ON t_b.category_id = t_b_c.category_id
+        LEFT JOIN (
+            t_blog__tag t_b__t LEFT JOIN t_blog_tag t_b_t
+                ON t_b_t.tag_id = t_b__t.tag_id
+        )
+        ON t_b.blog_id = t_b__t.blog_id
+        WHERE BLOG_DRAFTS = 0
+        ORDER BY BLOG_MODIFY_TIME
+        DESC;
+    </select>
+    <select id="getAllBlogAdmin" resultMap="getBlogFullInfoMap">
+        SELECT t_b.BLOG_ID, BLOG_NAME, BLOG_RECOMMEND, BLOG_DRAFTS, BLOG_MODIFY_TIME, t_b.category_id, category_name
+        FROM t_blog t_b left join t_blog_category t_b_c
+        ON t_b.category_id = t_b_c.category_id
+        ORDER BY blog_publish_time
+        DESC
+    </select>
+    <select id="getLatestBlog" resultMap="getBlogFullInfoMap">
+        SELECT * FROM t_blog WHERE blog_drafts = 0 AND blog_recommend = 1 ORDER BY blog_publish_time DESC LIMIT 5
+    </select>
+    <select id="getCategoryBlog" resultMap="getBlogFullInfoMap" parameterType="java.lang.Integer">
+        SELECT *, b.category_id, b.category_name, c.tag_id, d.tag_name
+        FROM t_blog a, t_blog_category b, t_blog__tag c, t_blog_tag d
+        WHERE a.blog_drafts = 0 AND c.tag_id = d.tag_id AND c.blog_id = a.blog_id AND b.category_id = #{categoryId} AND a.category_id = b.category_id
+        ORDER BY blog_modify_time
+        DESC
+    </select>
+    <select id="getTagBlog" resultMap="getBlogFullInfoMap" parameterType="java.lang.Integer">
+        SELECT * FROM t_blog A, t_blog__tag B, t_blog_tag C, t_blog_category D WHERE A.BLOG_ID = B.BLOG_ID AND B.TAG_ID = C.TAG_ID AND A.CATEGORY_ID = D.CATEGORY_ID AND blog_drafts = 0 AND B.TAG_ID = #{tagId};
+    </select>
+    <select id="searchBlog" resultMap="getBlogFullInfoMap" parameterType="java.lang.String">
+        SELECT A.BLOG_ID, BLOG_NAME, BLOG_COVER, BLOG_VIEW_COUNT, BLOG_PUBLISH_TIME, B.CATEGORY_ID, CATEGORY_NAME, C.TAG_ID, TAG_NAME FROM t_blog A LEFT JOIN t_blog_category B ON A.CATEGORY_ID = B.CATEGORY_ID
+        LEFT JOIN (t_blog_tag C LEFT JOIN t_blog__tag D ON C.TAG_ID = D.TAG_ID)
+        ON A.BLOG_ID = D.BLOG_ID
+        WHERE BLOG_DRAFTS = 0 AND BLOG_NAME LIKE "%"#{target}"%" OR BLOG_DESCRIBE LIKE "%"#{target}"%"
+        ORDER BY BLOG_PUBLISH_TIME
+        DESC
+    </select>
+    <select id="getBlogYear" resultType="java.lang.String">
+        SELECT (SELECT DATE_FORMAT(blog_publish_time, '%Y年%m月')) AS 'year' FROM t_blog WHERE blog_drafts = 0 GROUP BY year ORDER BY year DESC;
+    </select>
+    <select id="getBlogByYearMonth" resultMap="getBlogFullInfoMap">
+        SELECT * FROM t_blog WHERE BLOG_DRAFTS = 0 AND DATE_FORMAT(blog_publish_time, '%Y年%m月') = #{yearAndMonth} ORDER BY blog_publish_time DESC;
+    </select>
+    <resultMap type="com.patrickstar.blog.entity.Blog" id="getBlogFullInfoMap">
+        <id property="id" column="blog_id"/>
+        <result property="title" column="blog_name"/>
+        <result property="describe" column="blog_describe"/>
+        <result property="content" column="blog_content"/>
+        <result property="cover" column="blog_cover"/>
+        <result property="type" column="blog_type"/>
+        <result property="viewCount" column="blog_view_count"/>
+        <result property="recommend" column="blog_recommend"/>
+        <result property="appreciation" column="blog_appreciation"/>
+        <result property="comment" column="blog_comment"/>
+        <result property="sharable" column="blog_sharable"/>
+        <result property="publishTime" column="blog_publish_time"/>
+        <result property="modifyTime" column="blog_modify_time"/>
+        <result property="drafts" column="blog_drafts"/>
+        <!-- association ：配置一对一属性 -->
+        <!-- property:category里面的id属性名 -->
+        <!-- javaType:属性类型 -->
+        <association property="belongCategory" javaType="com.patrickstar.blog.entity.Category">
+            <id column="category_id" property="id"/>
+            <result column="category_name" property="name"/>
+        </association>
+        <collection property="tags" ofType="com.patrickstar.blog.entity.Tag">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="name"/>
+        </collection>
+    </resultMap>
+</mapper>

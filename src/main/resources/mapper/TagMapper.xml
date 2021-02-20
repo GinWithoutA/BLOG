@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.TagDao">
+    <insert id="addTag" parameterType="com.patrickstar.blog.entity.Tag">
+        INSERT INTO t_blog_tag(tag_id, tag_name) VALUES(#{id}, #{name})
+    </insert>
+    <delete id="deleteTag" parameterType="java.lang.Integer">
+        DELETE FROM t_blog_tag WHERE tag_id = #{id}
+    </delete>
+    <update id="updateTag" parameterType="com.patrickstar.blog.entity.Tag">
+        UPDATE t_blog_tag SET tag_name = #{name} WHERE tag_id = #{id}
+    </update>
+    <select id="getTag" parameterType="java.lang.Integer" resultType="com.patrickstar.blog.entity.Tag">
+        SELECT tag_id AS 'id', tag_name AS 'name' FROM t_blog_tag WHERE tag_id = #{id}
+    </select>
+    <select id="getAllTag" resultMap="getTagFullInfo">
+        SELECT c.tag_id, tag_name, blog_id
+        FROM t_blog_tag c left join t_blog__tag b
+                                    on c.tag_id = b.tag_id
+        ORDER BY(
+                    SELECT COUNT(a.tag_id) FROM t_blog__tag a WHERE a.tag_id = c.tag_id
+                )
+            DESC;
+    </select>
+    <select id="getAllTagAdmin" resultType="com.patrickstar.blog.entity.Tag">
+        SELECT tag_id AS 'id', tag_name AS 'name' FROM t_blog_tag
+    </select>
+    <select id="getAllTagIndex" resultMap="getTagFullInfo">
+        SELECT bt.*, blog_id
+        FROM t_blog_tag bt, t_blog__tag b_t
+        WHERE bt.tag_id = b_t.tag_id
+        ORDER BY (
+                SELECT count(tag_id) FROM t_blog__tag b_t_2 WHERE b_t.tag_id = b_t_2.tag_id
+            )
+        DESC
+    </select>
+    <resultMap id="getTagFullInfo" type="com.patrickstar.blog.entity.Tag">
+        <id property="id" column="tag_id" />
+        <result property="name" column="tag_name"/>
+        <collection property="blogs" ofType="com.patrickstar.blog.entity.Blog">
+            <id property="id" column="blog_id"/>
+        </collection>
+    </resultMap>
+    <select id="getRequireTag" parameterType="List" resultType="com.patrickstar.blog.entity.Tag">
+        SELECT tag_id AS 'id', tag_name AS 'name' FROM t_blog_tag WHERE tag_id IN
+        <!-- item 循环中当前的元素
+             index 当前元素下标
+             collection 配置的list是当前元素传过来的下标，它可以是一个array，list（或collection），map集合的键，pojo包装类中数组或集合类型的属性名等
+             open 和 close 配置的是以什么符号把这些元素装起来
+             separator 配置的是各个元素的间隔符
+             -->
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer" />
+        <title>分类管理</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
+        <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}"/>
+        <link rel="stylesheet" href="../../static/lib/editor_md/css/editormd.min.css" th:href="@{/lib/editor_md/css/editormd.min.css}"/>
+        <link rel="icon" type="image/x-icon" href="../image/logo-admin.ico" />
+    </head>
+    <body>
+        <!-- 导航        反转-->
+        <nav class="ui inverted attached segment m-padded-tb-mini">
+            <div class="ui container">
+                <!--                              可堆叠的-->
+                <div class="ui inverted secondary stackable menu">
+                    <!--          颜色  logo  表示一个条目       -->
+                    <h2 class="ui teal header item">PatrickStaR后台管理</h2>
+                    <a href="#" th:href="@{/admin/index}" class="item m-mobile-hide m-item"><i class="mini home icon"></i>首页</a>
+                    <a href="#" th:href="@{/admin/category_management}" class="active item m-mobile-hide m-item"><i class="mini idea icon"></i>分类</a>
+                    <a href="#" th:href="@{/admin/tag_management}" class="item m-mobile-hide m-item"><i class="mini tags icon"></i>标签</a>
+                    <!-- 登录用户 -->
+                    <div class="right menu m-mobile-hide m-item">
+                        <div class="ui dropdown item">
+                            <div class="text">
+                                <img src="https://c-ssl.duitang.com/uploads/item/201410/19/20141019105822_n2nm2.jpeg" alt="用户头像" class="ui avatar image">
+                                王荣臻
+                            </div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="#" class="item" th:href="@{/admin/logout}">注销</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+                <i class="sidebar icon"></i>
+            </a>
+        </nav>
+        <!-- 中间内容 -->
+        <div class="m-container m-padded-tb-large m-margin-bottom-massive">
+            <div class="ui container m-margin-tb-normal">
+                <!-- 操作成功失败提示 -->
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="success-message close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:text="${message}"></p>
+                </div>
+                <!--
+                <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                    <i class="close icon"></i>
+                    <div class="header">验证失败</div>
+                    <p th:errors="*{name}">提交信息不符合规定，别乱搞哟</p>
+                </div>
+                -->
+                <form action="#" method="post" class="ui segment form" >
+                    <div class="inline fields">
+<!--                        <div class="field">-->
+<!--                            <input type="text" name="title" placeholder="分类名">-->
+<!--                        </div>-->
+<!--                        <div class="field">-->
+<!--                            <div class="ui search selection dropdown">-->
+<!--                                <input type="hidden" name="type">-->
+<!--                                <i class="dropdown icon"></i>-->
+<!--                                <div class="default text">分类</div>-->
+<!--                                <div class="menu">-->
+<!--                                    <div th:each="category : ${allCategory}" class="item" data-value="1" th:data-value="${category.id}" th:text="${category.name}">测试分类</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="field">
+                            <button class="ui teal basic button mini" style="display: none"><i class="search icon"></i>搜索</button>
+                            <button type="button" class="ui teal basic button mini addButton"><i class="add icon"></i>新增分类</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="ui small teal fixed celled table m-margin-tb-normal" >
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="category,iterStat : ${indexPage}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td class="td_category_id" th:text="${category.id}">1</td>
+                        <td class="td_category_name" th:text="${category.name}">小说</td>
+                        <td>
+                            <a href="#" class="ui mini teal button updateButton">编辑</a>
+                            <a href="#" class="ui mini red button deleteButton" onclick="confirmDelete(this)" >删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <!-- 分页 -->
+                    <tfoot class="center aligned">
+                    <tr>
+                        <th colspan="4">
+                            <div class="ui pagination menu">
+                                <a href="#" class="icon item prev_page_item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                                <a th:id="${page}" th:each="page : ${#numbers.sequence(1, pageNum)}" th:value="${page}" href="#" class=" item page_item" th:href="@{/admin/page(type=category, requirePage=${page})}" th:text="${page}">1</a>
+                                <a href="#" class="icon item next_page_item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+                <!-- 下一页的页码 -->
+                <input id="next_page" type="hidden" th:value="${nextPage}"/>
+                <!-- 上一页的页码 -->
+                <input id="prev_page" type="hidden" th:value="${prevPage}"/>
+                <!-- 当前的页码 -->
+                <input id="current_page" type="hidden" th:value="${currentPage}"/>
+            </div>
+        </div>
+        <!-- 底部元素 -->
+        <footer class="ui inverted vertical segment m-padded-tb-massive m-margin-top-large m-footer-bottom">
+            <div class="ui center aligned container">
+                <p class="m-text-thin m-text-spaced m-opacity-mini">PatrickStaR 后台管理系统</p>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright @ 2019 PatrickStaR Designed by PatrickStaR</p>
+            </div>
+        </footer>
+        <!-- 模态框：新增 -->
+        <form class="ui modal addModal form segment error" action="#" th:action="@{/category/add}" method="post" th:object="${category}">
+            <i class="close icon"></i>
+            <div class="header">新增分类</div>
+            <div class="m-padded-lr-responsive m-padded-tb-big required field">
+                <div class="ui fluid labeled input m-margin-tb-normal">
+                    <div class="ui black label" style="width: 100px !important;">分类ID </div>
+                    <input type="text" id="addCategory_id" name="id" placeholder="#">
+                </div>
+                <div class="ui fluid labeled input m-margin-tb-normal required field">
+                    <div class="ui black label" style="width: 100px !important;">分类名称 </div>
+                    <input type="text" id="addCategory_name" name="name" placeholder="#" th:value="*{name}">
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui black deny button">
+                    返 回
+                </div>
+                <button class="ui positive right labeled icon button">
+                    提交
+                    <i class="checkmark icon"></i>
+                </button>
+            </div>
+        </form>
+        <!-- 模态框：删除 -->
+        <div class="ui basic modal confirmDeleteModal">
+            <div class="ui icon header">
+                <i class="archive icon"></i>
+                Delete Choosen Category
+            </div>
+            <div class="content delete_content">
+                <p class="text_append"></p>
+            </div>
+            <div class="actions">
+                <a class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </a>
+                <a class="ui green ok inverted button" href="#" >
+                    <i class="checkmark icon"></i>
+                    Yes
+                </a>
+            </div>
+        </div>
+        <!-- 模态框：更新 -->
+        <form class="ui modal updateModal" action="/category/update" method="post">
+            <i class="close icon"></i>
+            <div class="header">
+                <i class="edit black icon"></i>
+                更 新
+            </div>
+                <div class="m-padded-lr-responsive m-padded-tb-big">
+                    <div class="ui fluid labeled input m-margin-tb-normal">
+                        <div class="ui black label" style="width: 100px !important;">类型ID </div>
+                        <input type="text" id="editCategory_id" name="id" placeholder="#" readonly>
+                    </div>
+                    <div class="ui fluid labeled input m-margin-tb-normal">
+                        <div class="ui black label" style="width: 100px !important;">类型名称 </div>
+                        <input type="text" id="editCategory_name" name="name" placeholder="#">
+                    </div>
+                </div>
+                <div class="actions">
+                    <div class="ui black deny button">
+                        回 撤
+                    </div>
+                    <button class="ui positive right labeled icon button">
+                        更 新
+                        <i class="checkmark icon"></i>
+                    </button>
+                </div>
+        </form>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script>
+            $(function () {
+                //判断当前所在的是哪一页
+                $('#' + $('#current_page').val()).addClass('active').css('cursor', 'default').removeAttr('href');
+                //若当前是最后一页，后翻按钮取消点击事件
+                if ($('#next_page').val() == '') {
+                    $('.prev_page_item').attr('href', '/admin/page?type=category&requirePage=' + $('#prev_page').val());
+                    $('.next_page_item').css('cursor', 'default').removeAttr('href');
+
+                }
+                //若当前是第一页，前翻按钮取消点击事件
+                if ($('#prev_page').val() == '') {
+                    $('.next_page_item').attr('href', '/admin/page?type=category&requirePage=' + $('#next_page').val());
+                    $('.prev_page_item').css('cursor', 'default').removeAttr('href');
+                }
+                //若在中间页面，则前后翻按钮都存在
+                if ($('#prev_page').val() != '' && $('#next_page').val() != '') {
+                    $('.prev_page_item').attr('href', '/admin/page?type=category&requirePage=' + $('#prev_page').val());
+                    $('.next_page_item').attr('href', '/admin/page?type=category&requirePage=' + $('#next_page').val());
+                }
+                //若只有一页，则前后翻按钮都失效
+                if ($('#prev_page').val() == '' && $('#next_page').val() == '') {
+                    $('.prev_page_item').css('cursor', 'default').removeAttr('href');
+                    $('.next_page_item').css('cursor', 'default').removeAttr('href');
+                }
+
+            });
+            $('.menu.toggle').click(function () {
+                $('.m-item').toggleClass('m-mobile-hide');
+            });
+            $('.ui .dropdown').dropdown({
+                on : 'hover'
+            });
+            function confirmDelete(obj) {
+                $('.confirmDeleteModal').modal('setting', 'closable', false).modal('show');
+                $('.delete_content').children('.text_append').text('你确定删除' + $(obj).parent().siblings(".td_category_name").html() + '这个分类吗？');
+                $('.ok.button').attr('href', '/category/delete?id=' + $(obj).parent().siblings('.td_category_id').html());
+            }
+            $('.ui.addButton').click(function () {
+                $('.addModal').modal('setting', 'closable', false).modal('show');
+            });
+            $('.ui.updateButton').on("click", function () {
+                $('.updateModal').modal('setting', 'closable', false).modal('show');
+                $('#editCategory_id').val($(this).parent().siblings(".td_category_id").html());
+                $('#editCategory_name').val($(this).parent().siblings(".td_category_name").html());
+
+            });
+            //消息提示关闭初始化
+            $('.success-message').on('click', function () {
+                $(this).closest('.success.message').transition('fade');
+            });
+
+        </script>
+    </body>
+</html>

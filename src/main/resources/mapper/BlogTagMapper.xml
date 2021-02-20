@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 表示命名空间 -->
+<mapper namespace="com.patrickstar.blog.dao.BlogTagDao">
+    <insert id="addBlogTag" parameterType="com.patrickstar.blog.entity.BlogTag">
+        INSERT INTO t_blog__tag(BLOG_ID, TAG_ID) VALUES(#{blogId}, #{tagId})
+    </insert>
+    <delete id="deleteBlogTag" parameterType="java.lang.Integer">
+        DELETE FROM t_blog__tag WHERE blog_id = #{blogId}
+    </delete>
+    <select id="getBlogAllTag" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT tag_id AS 'tagId' FROM t_blog__tag WHERE blog_id = #{blogId}
+    </select>
+</mapper>

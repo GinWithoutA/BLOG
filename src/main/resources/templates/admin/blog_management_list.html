@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer" />
+        <title>博客管理</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
+        <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}"/>
+        <link rel="icon" type="image/x-icon" href="../image/logo-admin.ico" />
+    </head>
+    <body>
+        <!-- 导航        反转-->
+        <nav class="ui inverted attached segment m-padded-tb-mini">
+            <div class="ui container">
+                <!--                              可堆叠的-->
+                <div class="ui inverted secondary stackable menu">
+                    <!--          颜色  logo  表示一个条目       -->
+                    <h2 class="ui teal header item">PatrickStaR后台管理</h2>
+                    <a href="#" th:href="@{/admin/index}" class="active item m-mobile-hide m-item"><i class="mini home icon"></i>首页</a>
+                    <a href="#" th:href="@{/admin/category_management}" class="item m-mobile-hide m-item"><i class="mini idea icon"></i>分类</a>
+                    <a href="#" th:href="@{/admin/tag_management}" class="item m-mobile-hide m-item"><i class="mini tags icon"></i>标签</a>
+                    <!-- 登录用户 -->
+                    <div class="right menu m-mobile-hide m-item">
+                        <div class="ui dropdown item">
+                            <div class="text">
+                                <img th:src="@{https://c-ssl.duitang.com/uploads/item/201410/19/20141019105822_n2nm2.jpeg}" src="https://c-ssl.duitang.com/uploads/item/201410/19/20141019105822_n2nm2.jpeg" alt="用户头像" class="ui avatar image">
+                                王荣臻
+                            </div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="#" class="item" th:href="@{/admin/logout}">注销</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+                <i class="sidebar icon"></i>
+            </a>
+        </nav>
+        <div class="ui attached pointing menu">
+            <div class="ui container">
+                <a href="#" class="item" th:href="@{/admin/blog_management_post}">博客发布</a>
+                <a href="#" class="active teal item" th:href="@{/admin/blog_management_list}">博客列表</a>
+            </div>
+        </div>
+        <!-- 中间内容 -->
+        <div class="m-container m-padded-tb-large">
+            <div class="ui container m-margin-tb-normal">
+                <!-- 操作成功失败提示 -->
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="success-message close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:text="${message}"></p>
+                </div>
+                <form action="#" method="post" class="ui segment form">
+                    <div class="inline fields">
+<!--                        <div class="field">-->
+<!--                            <input type="text" name="title" placeholder="标题">-->
+<!--                        </div>-->
+<!--                        <div class="field">-->
+<!--                            <div class="ui selection dropdown">-->
+<!--                                <input type="hidden" name="type">-->
+<!--                                <i class="dropdown icon"></i>-->
+<!--                                <div class="default text">分类</div>-->
+<!--                                <div class="menu">-->
+<!--                                    <div th:each="category : ${allCategory}" class="item" data-value="1" th:data-value="${category.id}" th:text="${category.name}">默认分类</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="field">-->
+<!--                            <div class="ui checkbox">-->
+<!--                                <input type="checkbox" id="recommend" name="recommend">-->
+<!--                                <label for="recommend">推荐</label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="field">
+                            <button class="ui teal basic button mini" id="search_btn" style="display: none"><i class="search icon"></i>搜索</button>
+                            <a class="ui teal basic button mini" th:href="@{/admin/blog_management_post}"><i class="add icon"></i>新增博客</a>
+                        </div>
+                    </div>
+                </form>
+                <table class="ui table m-margin-tb-normal" >
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>类型</th>
+                            <th>推荐</th>
+                            <th>是否发布</th>
+                            <th>更新时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="blog : ${indexPage}">
+                            <td class="td_blog_id" th:text="${blog.id}">1</td>
+                            <td class="td_blog_title" th:text="${blog.title}">谁的青春不流泪？</td>
+                            <td th:text="${blog.belongCategory.name}">认知升级</td>
+                            <td th:text="${blog.recommend} ? '是' : '否'">是</td>
+                            <td th:text="${blog.drafts} ? '在草稿箱' : '已发布'">在草稿箱</td>
+                            <td th:text="${blog.modifyTime}">2019-10-27 10:48</td>
+                            <td>
+                                <a href="#" class="ui mini teal button" th:href="@{/blog/blog_management_post(id=${blog.id})}">编辑</a>
+                                <a href="#" class="ui mini red button" onclick="confirmDelete(this)">删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- 分页 -->
+                    <tfoot class="center aligned">
+                        <tr>
+                            <th colspan="7">
+                                <div class="ui pagination menu">
+                                    <a href="#" class="icon item prev_page_item">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a th:id="${page}" th:each="page : ${#numbers.sequence(1, pageNum)}" th:value="${page}" href="#" class=" item page_item" th:href="@{/admin/page(type=blog, requirePage=${page})}" th:text="${page}">1</a>
+                                    <a href="#" class="icon item next_page_item">
+                                        <i class="right chevron icon"></i>
+                                    </a>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <!-- 下一页的页码 -->
+                <input id="next_page" type="hidden" th:value="${nextPage}"/>
+                <!-- 上一页的页码 -->
+                <input id="prev_page" type="hidden" th:value="${prevPage}"/>
+                <!-- 当前的页码 -->
+                <input id="current_page" type="hidden" th:value="${currentPage}"/>
+            </div>
+        </div>
+        <!-- 模态框：删除 -->
+        <div class="ui basic modal confirmDeleteModal">
+            <div class="ui icon header">
+                <i class="archive icon"></i>
+                Delete Choosen Blog
+            </div>
+            <div class="content delete_content">
+                <p class="text_append"></p>
+            </div>
+            <div class="actions">
+                <a class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </a>
+                <a class="ui green ok inverted button" href="#" >
+                    <i class="checkmark icon"></i>
+                    Yes
+                </a>
+            </div>
+        </div>
+        <!-- 底部元素 -->
+        <footer class="ui inverted vertical segment m-padded-tb-massive m-margin-top-large">
+            <div class="ui center aligned container">
+                <p class="m-text-thin m-text-spaced m-opacity-mini">PatrickStaR 后台管理系统</p>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright @ 2019 PatrickStaR Designed by PatrickStaR</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script>
+            $(function () {
+                //判断当前所在的是哪一页
+                $('#' + $('#current_page').val()).addClass('active').css('cursor', 'default').removeAttr('href');
+                //若当前是最后一页，后翻按钮取消点击事件
+                if ($('#next_page').val() == '') {
+                    $('.prev_page_item').attr('href', '/admin/page?type=blog&requirePage=' + $('#prev_page').val());
+                    $('.next_page_item').css('cursor', 'default').removeAttr('href');
+
+                }
+                //若当前是第一页，前翻按钮取消点击事件
+                if ($('#prev_page').val() == '') {
+                    $('.next_page_item').attr('href', '/admin/page?type=blog&requirePage=' + $('#next_page').val());
+                    $('.prev_page_item').css('cursor', 'default').removeAttr('href');
+                }
+                //若在中间页面，则前后翻按钮都存在
+                if ($('#prev_page').val() != '' && $('#next_page').val() != '') {
+                    $('.prev_page_item').attr('href', '/admin/page?type=blog&requirePage=' + $('#prev_page').val());
+                    $('.next_page_item').attr('href', '/admin/page?type=blog&requirePage=' + $('#next_page').val());
+                }
+                //若只有一页，则前后翻按钮都失效
+                if ($('#prev_page').val() == '' && $('#next_page').val() == '') {
+                    $('.prev_page_item').css('cursor', 'default').removeAttr('href');
+                    $('.next_page_item').css('cursor', 'default').removeAttr('href');
+                }
+            });
+            $('.menu.toggle').click(function () {
+                $('.m-item').toggleClass('m-mobile-hide');
+            });
+            $('.ui .dropdown').dropdown({
+                on : 'hover'
+            });
+            function confirmDelete(obj) {
+                $('.confirmDeleteModal').modal('setting', 'closable', false).modal('show');
+                $('.delete_content').children('.text_append').text('你确定删除"' + $(obj).parent().siblings(".td_blog_title").html() + '"这个博客吗？');
+                $('.ok.button').attr('href', '/blog/delete?id=' + $(obj).parent().siblings('.td_blog_id').html());
+            }
+            //消息提示关闭初始化
+            $('.success-message').on('click', function () {
+                $(this).closest('.success.message').transition('fade');
+            });
+        </script>
+    </body>
+</html>

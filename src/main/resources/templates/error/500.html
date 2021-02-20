@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer" />
+        <title>500出错啦！</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
+        <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}"/>
+        <link rel="icon" type="image/x-icon" href="../image/logo-error.ico" />
+    </head>
+    <body>
+        <!-- 导航        反转-->
+        <nav class="ui inverted attached segment m-padded-tb-mini">
+            <div class="ui container">
+                <!--                              可堆叠的-->
+                <div class="ui inverted secondary stackable menu">
+                    <!--          颜色  logo  表示一个条目       -->
+                    <h2 class="ui teal header item">PatrickStaR</h2>
+                    <a href="#" th:href="@{/}" class="item m-mobile-hide m-item"><i class="mini home icon"></i>首页</a>
+                    <a href="#" th:href="@{/blog_category}" class="item  m-mobile-hide m-item"><i class="mini idea icon"></i>分类</a>
+                    <a href="#" th:href="@{/blog_tag}" class="item  m-mobile-hide m-item"><i class="mini tag icon"></i>标签</a>
+                    <a href="#" th:href="@{/blog_archive}" class="item  m-mobile-hide m-item"><i class="mini clone icon"></i>归档</a>
+                    <a href="#" th:href="@{/about_me}" class="item  m-mobile-hide m-item"><i class="mini info icon"></i>关于我</a>
+                    <div class="right item  m-mobile-hide m-item">
+        <!--                <div class="ui large icon inverted transparent input">-->
+        <!--                    <input type="text" placeholder="Search...">-->
+        <!--                    <i class="search link icon"></i>-->
+        <!--                </div>-->
+                        <form action="#" name="search_form" th:action="@{/search}">
+                            <div class="ui large icon inverted transparent input">
+                                <input type="text" name="target" placeholder="Search...">
+                                <i onclick="document.forms['search_form'].submit()" class="search link icon"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+                <i class="sidebar icon"></i>
+            </a>
+        </nav>
+        <div class="m-container-small m-padded-tb-massive">
+            <div class="ui error message">
+                <div class="ui container">
+                    <h2>500</h2>
+                    <p>出错啦！</p>
+                </div>
+            </div>
+        </div>
+        <!-- 底部元素 -->
+        <footer class="ui inverted vertical segment m-padded-tb-massive">
+            <div class="ui center aligned container">
+                <!-- 将网页分成16份，bootstrap分成12份 -->
+                <div class="ui inverted divided stackable grid">
+                    <!-- 占三份，填满，一列 -->
+                    <div class="four wide column">
+                        <div class="item ">
+                            <img src="../../static/image/wechat_qrcode.jpg" th:src="@{/image/wechat_qrcode.jpg}" class="ui rounded image centered aligned m-img-style" alt="QRCODE">
+                        </div>
+                    </div>
+                    <div class="four wide column">
+                        <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                        <div class="ui inverted link list">
+                            <a class="item" style="cursor: default">Email: abc6339139@vip.qq.com</a>
+                            <a class="item" style="cursor: default">QQ: 804217071<br>(用得少了，微信常年等CALL)</a>
+                            <a class="item" style="cursor: default">WeChat: abc6339139<br>(扫旁边的码也行)</a>
+                        </div>
+                    </div>
+                    <div class="eight wide column">
+                        <h4 class="ui inverted header m-text-thin m-text-spaced">关于博客</h4>
+                        <p class="m-opacity-massive">很高兴你能来到我的个人博客，我希望这个博客能把我所经历的一些有趣的东西，不管是技术，还是好玩的都能分享给你，你也能从中知道些得到些什么，或许有时候也能给你的困惑一点帮助，我会十分开心的！前面是我的个人微信，可以联系我，很高兴和你称为朋友！</p>
+                    </div>
+                </div>
+                <!-- 分割线 -->
+                <div class="ui inverted section divider"></div>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright @ 2019 PatrickStaR Designed by PatrickStaR</p>
+            </div>
+        </footer>
+    </body>
+</html>

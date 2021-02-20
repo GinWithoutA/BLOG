@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="no-referrer" />
+        <title>博客管理</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
+        <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}"/>
+        <link rel="stylesheet" href="../../static/lib/editor_md/css/editormd.min.css" th:href="@{/lib/editor_md/css/editormd.min.css}"/>
+        <link rel="icon" type="image/x-icon" href="../image/logo-admin.ico" />
+    </head>
+    <body>
+        <!-- 导航        反转-->
+        <nav class="ui inverted attached segment m-padded-tb-mini">
+            <div class="ui container">
+                <!--                              可堆叠的-->
+                <div class="ui inverted secondary stackable menu">
+                    <!--          颜色  logo  表示一个条目       -->
+                    <h2 class="ui teal header item">PatrickStaR后台管理</h2>
+                    <a href="#" th:href="@{/admin/index}" class="active item m-mobile-hide m-item"><i class="mini home icon"></i>首页</a>
+                    <a href="#" th:href="@{/admin/category_management}" class="item m-mobile-hide m-item"><i class="mini idea icon"></i>分类</a>
+                    <a href="#" th:href="@{/admin/tag_management}" class="item m-mobile-hide m-item"><i class="mini tags icon"></i>标签</a>
+                    <!-- 登录用户 -->
+                    <div class="right menu m-mobile-hide m-item">
+                        <div class="ui dropdown item">
+                            <div class="text">
+                                <img src="https://c-ssl.duitang.com/uploads/item/201410/19/20141019105822_n2nm2.jpeg" alt="用户头像" class="ui avatar image">
+                                王荣臻
+                            </div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="#" class="item" th:href="@{/admin/logout}">注销</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+                <i class="sidebar icon"></i>
+            </a>
+        </nav>
+        <div class="ui attached pointing menu">
+            <div class="ui container">
+                <a href="#" class="active teal item" th:href="@{/admin/blog_management_post}">博客发布</a>
+                <a href="#" class="item" th:href="@{/admin/blog_management_list}">博客列表</a>
+            </div>
+        </div>
+        <!-- 中间内容 -->
+        <div class="m-container m-padded-tb-large">
+            <div class="ui container m-margin-tb-normal">
+                <!-- 操作成功失败提示 -->
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="success-message close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:text="${message}"></p>
+                </div>
+                <form id="blog_post_form" th:object="${editBlog}" action="#" method="post" th:action="@{/blog/add}" class="ui form">
+                    <input type="hidden" name="drafts">
+                    <input type="hidden" name="id" th:value="*{id}">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <div class="ui teal basic compact selection dropdown label" style="z-index: 999 !important;" id="dropdown-type">
+                                <input type="hidden" name="type" th:value="*{type}">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择文章类别</div>
+                                <div class="menu">
+                                    <div class="item" data-value="原创">原创</div>
+                                    <div class="item" data-value="转载">转载</div>
+                                    <div class="item" data-value="翻译">翻译</div>
+                                </div>
+                            </div>
+                            <input type="text" name="title" th:value="*{title}" placeholder="标题">
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui teal top attached segment">
+                            <h2 class="ui header">简介</h2>
+                        </div>
+                        <div id="">
+                            <textarea name="describe" placeholder="博客简介" th:text="*{describe}" ></textarea>
+                        </div>
+                    </div>
+                    <div class="required field" style="z-index: 1 !important;">
+                        <div class="ui teal top attached segment">
+                            <h2 class="ui header">正文</h2>
+                        </div>
+                        <div id="md-content">
+                            <textarea name="content" placeholder="博客内容" th:text="*{content}" style="display: none;">
+                                请在此处输入正文
+                                请使用MarkDown格式
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="required field">
+                            <div class="ui left labeled action input">
+                                <label class="ui compact teal basic label">分类</label>
+                                <div class="ui selection fluid dropdown" id="category">
+                                    <input type="hidden" name="belongCategory.id" th:value="*{belongCategory.id}">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">分类</div>
+                                    <div class="menu" >
+                                        <div th:each="category : ${allCategory}" class="item" data-value="1" th:data-value="${category.id}" th:text="${category.name}">错误日志</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled action input">
+                                <label class="ui compact teal basic label">标签</label>
+                                <div class="ui selection fluid multiple search dropdown">
+                                    <input type="hidden" name="tagIds" th:value="*{tagIds}">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">标签</div>
+                                    <div class="menu">
+                                        <div th:each="tag : ${allTag}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}">1</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui teal basic label">封面</label>
+                            <input name="cover" placeholder="封面引用地址" th:value="*{cover}">
+                        </div>
+                    </div>
+                    <div class="ui top attached teal segment m-margin-top-large">
+                        <h2 class="ui header">附加选项</h2>
+                    </div>
+                    <div class="ui bottom attached segment">
+                        <div class="inline fields">
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" id="recommend" name="recommend" th:checked="*{recommend}" class="hidden" >
+                                    <label for="recommend">推荐给访客</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" id="sharable" name="sharable" th:checked="*{sharable}"  class="hidden">
+                                    <label for="sharable">转载声明</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" id="appreciation" name="appreciation" th:checked="*{appreciation}" class="hidden">
+                                    <label for="appreciation">赞赏</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" id="comment" name="comment" th:checked="*{comment}" class="hidden">
+                                    <label for="comment">评论</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 错误出现时，默认找这个div：error -->
+                    <div class="ui error message"></div>
+                    <div class="ui right aligned container m-margin-top-large">
+                        <button type="button" class="ui button m-margin-left-normal" onclick="window.history.go(-1)">返回</button>
+                        <button type="button" id="save_button" class="ui secondary button m-margin-left-normal save_button">保存</button>
+                        <button type="button" id="publish_button" class="ui teal button m-margin-left-normal publish_button">发布</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- 底部元素 -->
+        <footer class="ui inverted vertical segment m-padded-tb-massive m-margin-top-large">
+            <div class="ui center aligned container">
+                <p class="m-text-thin m-text-spaced m-opacity-mini">PatrickStaR 后台管理系统</p>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright @ 2019 PatrickStaR Designed by PatrickStaR</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script type="text/javascript" src="../../static/lib/editor_md/editormd.min.js" th:src="@{/lib/editor_md/editormd.min.js}"></script>
+        <script>
+            //初始化markdown编辑器
+            var contentEditor;
+            $(function() {
+                contentEditor = editormd("md-content", {
+                    width   : "100%",
+                    height  : 640,
+                    syncScrolling : "single",
+                    path    : "/lib/editor_md/lib/",
+                    //下面这一行将使用dark主题
+                    previewTheme : "dark"
+                });
+
+                /*
+                // or
+                testEditor = editormd({
+                    id      : "test-editormd",
+                    width   : "90%",
+                    height  : 640,
+                    path    : "../lib/"
+                });
+                */
+            });
+            $('.menu.toggle').click(function () {
+                $('.m-item').toggleClass('m-mobile-hide');
+            });
+            $('.ui .dropdown').dropdown({
+                on : 'hover'
+            });
+            $('.ui.form').form({
+                fields: {
+                    title: {
+                        identifier: 'title',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '【标题】：请输入博客标题'
+                        }]
+                    },
+                    content: {
+                        identifier: 'content',
+                        rules : [{
+                            type: 'empty',
+                            prompt: '【博客内容】：请输入内容'
+                        }]
+                    },
+                    category: {
+                        identifier: 'category',
+                        rules : [{
+                            type: 'empty',
+                            prompt: '【博客内容】：请输入内容'
+                        }]
+                    },
+                    cover: {
+                        identifier: 'cover',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '【博客首页】：请给出博客首页图片的地址'
+
+                        }]
+                    }
+                }
+            });
+            $('.button.save_button').click(function () {
+                $('[name = "drafts"]').val(true);
+                $('#blog_post_form').submit();
+            });
+            $('.button.publish_button').click(function () {
+                $('[name = "drafts"]').val(false);
+                $('#blog_post_form').submit();
+            });
+            //消息提示关闭初始化
+            $('.success-message').on('click', function () {
+                $(this).closest('.success.message').transition('fade');
+            });
+        </script>
+    </body>
+</html>
